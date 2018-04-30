@@ -4,7 +4,7 @@
 		<title>E-Loket Test</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+		<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/util.css">
@@ -19,7 +19,12 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate="Silahkan masukkan nomor HP">
-						<input v-model="noHp" class="input100" type="text" name="name" placeholder="Nomor HP">
+						<input v-model="noHp" class="input100" type="text" ref="noHpBox" placeholder="Nomor HP"/>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Silahkan masukkan email">
+						<input v-model="email" class="input100" type="text" ref="emailBox" placeholder="Alamat email"/>
 						<span class="focus-input100"></span>
 					</div>
 
@@ -37,74 +42,10 @@
 
 		<script src="vendor/vue/vue.js"></script>
 		<script src="vendor/smtpjs/smtp.js"></script>
+		<script src="vendor/sweetalert/sweetalert.min.js"></script>
 		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 		<script src="vendor/bootstrap/js/popper.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="js/main.js"></script>
-
-		<script>
-      new Vue({
-        el: '#app',
-        data: {
-          noHp: '',
-					noHpSliced: '',
-					hasil: ''
-        },
-        methods:{
-          filterNoHp: function () {
-      			this.noHpSliced = this.noHp.slice(0, 4);
-						if (this.noHpSliced === '0811' || this.noHpSliced === '0812') {
-							this.hasil = 'Kartu Halo';
-						} else if (this.noHpSliced === '0813' || this.noHpSliced === '0821' || this.noHpSliced === '0822') {
-							this.hasil = 'Simpati';
-						} else if (this.noHpSliced === '0823' || this.noHpSliced === '0851' || this.noHpSliced === '0852'
-							|| this.noHpSliced === '0853') {
-							this.hasil = 'Kartu AS';
-						} else if (this.noHpSliced === '0814') {
-							this.hasil = 'IM2';
-						} else if (this.noHpSliced === '0815' || this.noHpSliced === '0816' || this.noHpSliced === '0858') {
-							this.hasil = 'Mentari';
-						} else if (this.noHpSliced === '0855') {
-							this.hasil = 'Matrix';
-						} else if (this.noHpSliced === '0856' || this.noHpSliced === '0857') {
-							this.hasil = 'IM3';
-						} else if (this.noHpSliced === '0817' || this.noHpSliced === '0818' || this.noHpSliced === '0819'
-							|| this.noHpSliced === '0859' || this.noHpSliced === '0877' || this.noHpSliced === '0878') {
-							this.hasil = 'XL';
-						} else if (this.noHpSliced === '0831' || this.noHpSliced === '0832' || this.noHpSliced === '0833'
-							|| this.noHpSliced === '0838') {
-							this.hasil = 'Axis';
-						} else if (this.noHpSliced === '0895' || this.noHpSliced === '0896' || this.noHpSliced === '0897'
-							|| this.noHpSliced === '0898' || this.noHpSliced === '0899') {
-							this.hasil = 'Three';
-						} else if (this.noHpSliced === '0881' || this.noHpSliced === '0882' || this.noHpSliced === '0883'
-							|| this.noHpSliced === '0884' || this.noHpSliced === '0885' || this.noHpSliced === '0886'
-							|| this.noHpSliced === '0887' || this.noHpSliced === '0888' || this.noHpSliced === '0889') {
-							this.hasil = 'Smartfren';
-						} else if (this.noHpSliced === '0828') {
-							this.hasil = 'Ceria';
-						}
-          },
-					kirimEmail: function () {
-						this.filterNoHp();
-						Email.send("gen781@gmail.com",
-							"rahmat_ade@datascrip.co.id",
-							"Hasil Pengiriman E-Loket",
-							"Nomor HP " + this.noHp + " adalah " + this.hasil,
-							"smtp.gmail.com",
-							"gen781",
-							"Fazilla2011110"
-						);
-						this.noHp="";
-						// Email.send("gen781@gmail.com",
-						// 	"to@them.com",
-						// 	"This is a subject",
-						// 	"this is the body",
-						// 	{token: "63cb3a19-2684-44fa-b76f-debf422d8b00"}
-						// );
-					}
-	      }
-      })
-    </script>
 	</body>
 </html>
